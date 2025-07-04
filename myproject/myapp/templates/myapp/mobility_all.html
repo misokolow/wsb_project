@@ -1,0 +1,66 @@
+{% extends "myapp/base.html" %}
+
+{% block title %} mob_all {% endblock %}
+
+{% block content %}
+
+    <table border="1">
+        <tr>
+            <th rowspan="2">LTE_Layer
+            <th colspan="1">A1 Parameters
+            <th colspan="2">A2 Parameters
+            <th colspan="3">A3 Parameters
+          <th colspan="4">A5 RSRP Parameters
+          <tr>
+            <th>RSRP Serving Cell better than
+             <th>RSRP Serving Cell worse than
+              <th>Time to Trigger
+              <th>RSRP Target Cell better than
+              <th>Hysteresis
+              <th>Time to Trigger
+              <th>RSRP Serving Cell worse than
+              <th>RSRP Target Cell better than
+              <th>Hysteresis
+              <th>Time to Trigger
+
+        {% for lte in ltes %}
+        <tr>
+            <td>{{ lte.layer }}
+            {% with thr1=-140|add:lte.threshold1 %}
+                <td>{{ thr1 }} dBm {% endwith %}
+                {% with thr2=-140|add:lte.threshold2interfreq %}
+                <td>{{ thr2 }} dBm {% endwith %}
+                {% if lte.a2timetotriggeractinterfreqmeas == 100 %}
+                        <td> 4 ms
+                {% else %}
+                        <td> 5 ms
+                {% endif %}
+
+          {% with thr3=-140|add:lte.a3offsetrsrpinterfreq %}
+                <td> {{ thr3 }} dB {% endwith %}
+                {% with hys1=lte.hysa3offsetrsrpinterfreq %}
+                <td> {{ hys1 }} dBm {% endwith %}
+                {% if lte.a3timetotrigger == 100 %}
+                        <td> 2 ms
+                {% else %}
+                        <td> 3 ms
+                {% endif %}
+          {% with thr4=-140|add:lte.threshold3interfreq %}
+                <td> {{ thr4 }} dBm {% endwith %}
+                {% with thr5=-140|add:lte.threshold3ainterfreq %}
+                <td> {{ thr5 }} dBm {% endwith %}
+                {% with hys2=lte.hysthreshold3interfreq %}
+                <td> {{ hys2 }} dBm {% endwith %}
+                {% if lte.a5timetotriggerinterfreq == 1000 %}
+                        <td> 400000 ms
+                {% else %}
+                        <td> 900000 ms
+                {% endif %}
+
+
+       {% empty %}
+        <tr>
+            <td colspan="3">NO configuration!
+        {% endfor %}
+    </table>
+{% endblock %}

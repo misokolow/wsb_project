@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Projekt zaliczeniowy{% endblock %}</title>
+
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>LTE parameters</h1>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %} Tu bedzie contenet {% endblock %}
+
+    </main>
+
+    <footer>
+        <hr>
+        <p>Opracował: Michał Sokołowski</p>
+        <a href="{% url 'start' %}">
+          <button type="button">Home</button>
+        </a>  <br> <br>
+    </footer>
+</body>

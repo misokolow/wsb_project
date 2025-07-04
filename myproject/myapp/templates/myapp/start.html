@@ -1,0 +1,19 @@
+{% extends "myapp/base.html" %}
+
+{% block title %} Start {% endblock %}
+
+{% block content %}
+
+
+        <a href="{% url 'lte_list' %}">
+          <button type="button">Show Connected Mobility per layer</button>
+        </a>  <br> <br>
+
+        <a href="{% url 'mobility_all' %}">
+          <button type="button">Show Connected Mobility all</button>
+        </a>  <br> <br>
+
+        <a href="{% url 'doc' %}">
+          <button type="button">Project Documentation</button>
+        </a> <br> <br>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "myapp/base.html" %}
+
+{% block title %} mob {% endblock %}
+
+{% block content %}
+<header>
+        <h3>LTE mobility between {{lte.layer}}</h3>
+        <hr>
+    </header>
+<table border="3">
+        <tr>
+                <th> A1 Parameters
+
+        <tr>
+                {% with thr1=-140|add:lte.threshold1 %}
+                <td>RSRP Serving Cell better than {{ thr1 }} dBm {% endwith %}
+
+
+</table>
+
+<br> <br> <br>
+<table border="3">
+        <tr>
+                <th> A2 Parameters
+
+        <tr>
+                {% with thr2=-140|add:lte.threshold2interfreq %}
+                <td>RSRP Serving Cell worse than {{ thr2 }} dBm {% endwith %}
+                {% if lte.a2timetotriggeractinterfreqmeas == 100 %}
+                        <tr><td>Time to Trigger = 4 ms
+                {% else %}
+                        <tr></tr><td>Time to Trigger = 5 ms
+                {% endif %}
+
+
+
+
+
+</table>
+
+<br> <br> <br>
+<table border="3">
+        <tr>
+
+                <th> A3 Parameters
+        <tr>
+                {% with thr3=-140|add:lte.a3offsetrsrpinterfreq %}
+                <td> RSRP Target Cell better than {{ thr3 }} dB {% endwith %}
+                {% with hys1=lte.hysa3offsetrsrpinterfreq %}
+                <tr><td> Hysteresis {{ hys1 }} dBm {% endwith %}
+                {% if lte.a3timetotrigger == 100 %}
+                        <tr><td>Time to Trigger = 2 ms
+                {% else %}
+                        <tr></tr><td>Time to Trigger = 3 ms
+                {% endif %}
+
+</table>
+<br> <br> <br>
+<table border="3">
+        <tr>
+                <th colspan="2"> A5 Trigger RSRP Parameters
+         <tr>
+                <th> A5 Serving Cell
+                <th> A5 Target Cell
+        <tr>
+                {% with thr4=-140|add:lte.threshold3interfreq %}
+                <td> RSRP Serving Cell worse than {{ thr4 }} dBm {% endwith %}
+                {% with thr5=-140|add:lte.threshold3ainterfreq %}
+                <td> RSRP Target Cell better than {{ thr5 }} dBm {% endwith %}
+                {% with hys2=lte.hysthreshold3interfreq %}
+                <tr><td colspan="2"> Hysteresis {{ hys2 }} dBm {% endwith %}
+                {% if lte.a5timetotriggerinterfreq == 1000 %}
+                        <tr><td colspan="2">Time to Trigger = 400000 ms
+                {% else %}
+                        <tr><td colspan="2">Time to Trigger = 900000 ms
+                {% endif %}
+</table>
+        <br> <br> <br>
+
+
+{% endblock %}
